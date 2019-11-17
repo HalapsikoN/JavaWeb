@@ -66,31 +66,31 @@ public class PyramidLogicTest {
     }
 
     @Test
-    public void shouldIsPyramid() {
+    public void shouldIsPyramidReturnTrueIfPyramidIsPyramid() {
         Assert.assertTrue(pyramidLogic.isPyramid(pyramid));
     }
 
     @Test
-    public void shouldSquareOfPyramid() throws NotPyramidException {
+    public void shouldSquareOfPyramidReturnCorrectSquareOfPyramid() throws NotPyramidException {
         double expected = 104.62 + 50 + 130;
         double actual = pyramidLogic.findSquareOfPyramid(pyramid);
         Assert.assertEquals(expected, actual, DELTA);
     }
 
     @Test
-    public void shouldVolumeOfPyramid() throws NotPyramidException {
+    public void shouldVolumeOfPyramidReturnCorrectVolumeOfPyramid() throws NotPyramidException {
         double expected = 216.667;
         double actual = pyramidLogic.findVolumeOfPyramid(pyramid);
         Assert.assertEquals(expected, actual, DELTA);
     }
 
     @Test
-    public void shouldIsPyramidBaseOnCoordinatePlane() {
+    public void shouldIsPyramidBaseOnCoordinatePlaneReturnTrueIfPyramidStaysOnCoordinatePlane() {
         Assert.assertFalse(pyramidLogic.isPyramidStayOnCoordinatePlaneBySide(pyramid));
     }
 
     @Test
-    public void shouldSplitByCoordinatePlane() throws NotPyramidException {
+    public void shouldSplitByCoordinatePlaneReturnCorrectRatioOfSplittingThePyramid() throws NotPyramidException {
         double expected = 48 / (216.667 - 48);
         double actual = pyramidLogic.findRatioOfPartsOfPyramidSplitedByCoordinatePlaneXY(pyramid);
         Assert.assertEquals(actual, expected, DELTA);
