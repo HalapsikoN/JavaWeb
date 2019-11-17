@@ -1,8 +1,14 @@
 package by.epam.day02.entity;
 
+import by.epam.day02.observer.EventManager;
+import by.epam.day02.observer.EventType;
+
 import java.util.Objects;
 
 public class Pyramid implements Figure {
+
+    //for observer
+    public EventManager events;
 
     private Point pointA;
     private Point pointB;
@@ -14,6 +20,7 @@ public class Pyramid implements Figure {
         this.pointB = pointB;
         this.pointC = pointC;
         this.pointD = pointD;
+        this.events=new EventManager();
     }
 
     public Pyramid() {
@@ -25,6 +32,7 @@ public class Pyramid implements Figure {
 
     public void setPointA(Point pointA) {
         this.pointA = pointA;
+        events.notify(EventType.CHANGE_POINT, this);
     }
 
     public Point getPointB() {
@@ -33,6 +41,7 @@ public class Pyramid implements Figure {
 
     public void setPointB(Point pointB) {
         this.pointB = pointB;
+        events.notify(EventType.CHANGE_POINT, this);
     }
 
     public Point getPointC() {
@@ -41,6 +50,7 @@ public class Pyramid implements Figure {
 
     public void setPointC(Point pointC) {
         this.pointC = pointC;
+        events.notify(EventType.CHANGE_POINT, this);
     }
 
     public Point getPointD() {
@@ -49,6 +59,7 @@ public class Pyramid implements Figure {
 
     public void setPointD(Point pointD) {
         this.pointD = pointD;
+        events.notify(EventType.CHANGE_POINT, this);
     }
 
     @Override

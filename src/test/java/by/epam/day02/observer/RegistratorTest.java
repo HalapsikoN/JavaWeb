@@ -1,4 +1,4 @@
-package by.epam.day02.logic;
+package by.epam.day02.observer;
 
 import by.epam.day02.dao.FileInformationReader;
 import by.epam.day02.dao.Parser;
@@ -7,7 +7,8 @@ import by.epam.day02.entity.Point;
 import by.epam.day02.entity.Pyramid;
 import by.epam.day02.exception.IllegalDataInFileExceprion;
 import by.epam.day02.exception.NotPyramidException;
-import by.epam.day02.observer.Registrator;
+import by.epam.day02.logic.PyramidLogic;
+import by.epam.day02.logic.PyramidLogicTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -19,8 +20,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PyramidLogicTest {
-    private static final Logger logger = LogManager.getLogger(PyramidLogicTest.class);
+public class RegistratorTest {
+    private static final Logger logger = LogManager.getLogger(Registrator.class);
 
     private final double DELTA = 0.1;
     private static PyramidLogic pyramidLogic;
@@ -28,6 +29,8 @@ public class PyramidLogicTest {
     private static final int NUMBER_OF_POINTS = 4;
     private static final int NUMBER_OF_POINT_CHARACTERISTICS = 3;
     private static final String FILE_PATH = "src/test/resources/File.txt";
+
+    private static Registrator registrator;
 
     @BeforeClass
     public static void initParam() throws IllegalDataInFileExceprion {
@@ -63,36 +66,27 @@ public class PyramidLogicTest {
         Point pD = listOfPoints.get(3);
 
         pyramid = new Pyramid(pA, pB, pC, pD);
+        //создание и подписка регистратора
+        registrator=new Registrator(pyramid);
+        logger.info("Data from registrator after the creating the pyramid: "+registrator);
+        pyramid.events.subscribe(EventType.CHANGE_POINT, registrator);
     }
 
     @Test
-    public void shouldIsPyramid() {
-        Assert.assertTrue(pyramidLogic.isPyramid(pyramid));
-    }
-
-    @Test
-    public void shouldSquareOfPyramid() throws NotPyramidException {
-        double expected = 104.62 + 50 + 130;
-        double actual = pyramidLogic.findSquareOfPyramid(pyramid);
+    public void shouldChangeTheRegistatorSquareAfterChangingTheParametersOfPyramid() throws NotPyramidException {
+        Point point=new Point(0,0,0);
+        pyramid.setPointA(point);
+        double expected=pyramidLogic.findSquareOfPyramid(pyramid);
+        double actual=registrator.getSquare();
         Assert.assertEquals(expected, actual, DELTA);
     }
 
     @Test
-    public void shouldVolumeOfPyramid() throws NotPyramidException {
-        double expected = 216.667;
-        double actual = pyramidLogic.findVolumeOfPyramid(pyramid);
+    public void shouldChangeTheRegistatorVolumeAfterChangingTheParametersOfPyramid() throws NotPyramidException {
+        Point point=new Point(0,0,20);
+        pyramid.setPointD(point);
+        double expected=pyramidLogic.findVolumeOfPyramid(pyramid);
+        double actual=registrator.getVolume();
         Assert.assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void shouldIsPyramidBaseOnCoordinatePlane() {
-        Assert.assertFalse(pyramidLogic.isPyramidStayOnCoordinatePlaneBySide(pyramid));
-    }
-
-    @Test
-    public void shouldSplitByCoordinatePlane() throws NotPyramidException {
-        double expected = 48 / (216.667 - 48);
-        double actual = pyramidLogic.findRatioOfPartsOfPyramidSplitedByCoordinatePlaneXY(pyramid);
-        Assert.assertEquals(actual, expected, DELTA);
     }
 }
