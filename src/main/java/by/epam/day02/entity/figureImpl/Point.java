@@ -1,9 +1,17 @@
-package by.epam.day02.entity;
+package by.epam.day02.entity.figureImpl;
+
+import by.epam.day02.entity.Figure;
+import by.epam.day02.observer.Observer;
+import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Point implements Figure {
 
+    private EventManagerForFigure eventManagerForFigure;
+
+    private final String id = UUID.randomUUID().toString();
     private double x;
     private double y;
     private double z;
@@ -12,6 +20,7 @@ public class Point implements Figure {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.eventManagerForFigure = new EventManagerForFigure(this);
     }
 
     public Point() {
@@ -23,6 +32,7 @@ public class Point implements Figure {
 
     public void setX(double x) {
         this.x = x;
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     public double getY() {
@@ -31,6 +41,7 @@ public class Point implements Figure {
 
     public void setY(double y) {
         this.y = y;
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     public double getZ() {
@@ -39,6 +50,7 @@ public class Point implements Figure {
 
     public void setZ(double z) {
         this.z = z;
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     @Override
@@ -63,5 +75,17 @@ public class Point implements Figure {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void subscribe(Observer listener) {
+        eventManagerForFigure.subscribe(listener);
+    }
+
+    public void unsubscribe(Observer listener) {
+        eventManagerForFigure.unsubscribe(listener);
     }
 }

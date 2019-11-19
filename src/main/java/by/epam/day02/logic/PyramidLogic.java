@@ -1,12 +1,21 @@
 package by.epam.day02.logic;
 
-import by.epam.day02.entity.Point;
-import by.epam.day02.entity.Pyramid;
-import by.epam.day02.entity.Vector;
+import by.epam.day02.entity.accessory.Vector;
+import by.epam.day02.entity.figureImpl.Point;
+import by.epam.day02.entity.figureImpl.Pyramid;
 import by.epam.day02.exception.NotPyramidException;
 
 
 public class PyramidLogic {
+
+    private final static PyramidLogic instance = new PyramidLogic();
+
+    private PyramidLogic() {
+    }
+
+    public static PyramidLogic getInstance() {
+        return instance;
+    }
 
     private double findDistanceBetweenPoints(Point p2, Point p1) {
         return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2) + Math.pow(p2.getZ() - p1.getZ(), 2));

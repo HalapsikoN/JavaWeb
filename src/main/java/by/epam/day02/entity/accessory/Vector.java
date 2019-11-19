@@ -1,4 +1,6 @@
-package by.epam.day02.entity;
+package by.epam.day02.entity.accessory;
+
+import by.epam.day02.entity.figureImpl.Point;
 
 import java.util.Objects;
 

@@ -1,15 +1,17 @@
-package by.epam.day02.entity;
+package by.epam.day02.entity.figureImpl;
 
-import by.epam.day02.observer.EventManager;
-import by.epam.day02.observer.EventType;
+import by.epam.day02.entity.Figure;
+import by.epam.day02.observer.Observer;
+import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Pyramid implements Figure {
 
-    //for observer
-    public EventManager events;
+    private EventManagerForFigure eventManagerForFigure;
 
+    private final String id = UUID.randomUUID().toString();
     private Point pointA;
     private Point pointB;
     private Point pointC;
@@ -20,7 +22,7 @@ public class Pyramid implements Figure {
         this.pointB = pointB;
         this.pointC = pointC;
         this.pointD = pointD;
-        this.events=new EventManager();
+        this.eventManagerForFigure = new EventManagerForFigure(this);
     }
 
     public Pyramid() {
@@ -32,7 +34,7 @@ public class Pyramid implements Figure {
 
     public void setPointA(Point pointA) {
         this.pointA = pointA;
-        events.notify(EventType.CHANGE_POINT, this);
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     public Point getPointB() {
@@ -41,7 +43,7 @@ public class Pyramid implements Figure {
 
     public void setPointB(Point pointB) {
         this.pointB = pointB;
-        events.notify(EventType.CHANGE_POINT, this);
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     public Point getPointC() {
@@ -50,7 +52,7 @@ public class Pyramid implements Figure {
 
     public void setPointC(Point pointC) {
         this.pointC = pointC;
-        events.notify(EventType.CHANGE_POINT, this);
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     public Point getPointD() {
@@ -59,7 +61,7 @@ public class Pyramid implements Figure {
 
     public void setPointD(Point pointD) {
         this.pointD = pointD;
-        events.notify(EventType.CHANGE_POINT, this);
+        eventManagerForFigure.notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent.CHANGE_POINT);
     }
 
     @Override
@@ -86,5 +88,17 @@ public class Pyramid implements Figure {
                 ", pointC=" + pointC +
                 ", pointD=" + pointD +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void subscribe(Observer listener) {
+        eventManagerForFigure.subscribe(listener);
+    }
+
+    public void unsubscribe(Observer listener) {
+        eventManagerForFigure.unsubscribe(listener);
     }
 }

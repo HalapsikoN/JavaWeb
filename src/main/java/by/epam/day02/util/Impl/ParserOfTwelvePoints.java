@@ -1,5 +1,6 @@
-package by.epam.day02.dao;
+package by.epam.day02.util.Impl;
 
+import by.epam.day02.util.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
