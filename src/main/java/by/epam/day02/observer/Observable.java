@@ -1,12 +1,10 @@
 package by.epam.day02.observer;
 
-import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
-
-public interface Observable {
+public interface Observable<Event, Observer> {
 
     void subscribe(Observer listener);
 
     void unsubscribe(Observer listener);
 
-    void notifyAllSubscribers(EventManagerForFigure.SubscriptionEvent event);
+    void notifyAllSubscribers(Event event);
 }
