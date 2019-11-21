@@ -38,10 +38,7 @@ public class FigureRepository {
     public void removeFigure(Figure figure) {
         logger.info("Remove Figure: " + figure);
         figureList.remove(figure);
-        if (figure.getClass() == Pyramid.class) {
-            Pyramid pyramid = (Pyramid) figure;
-            figureParamRegisterMap.remove(pyramid.getId());
-        }
+        figureParamRegisterMap.remove(figure.getId());
     }
 
     public List<Figure> getFigureList() {
@@ -63,10 +60,6 @@ public class FigureRepository {
     }
 
     public ParamRegister getParameters(Figure figure) {
-        if (figure.getClass() == Pyramid.class) {
-            Pyramid pyramid = (Pyramid) figure;
-            return figureParamRegisterMap.get(pyramid.getId());
-        }
-        return null;
+        return figureParamRegisterMap.get(figure.getId());
     }
 }

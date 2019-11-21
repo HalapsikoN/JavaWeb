@@ -7,7 +7,7 @@ import by.epam.day02.observer.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventManagerForFigure implements Observable {
+public class EventManagerForFigure implements Observable<EventManagerForFigure.SubscriptionEvent, Observer> {
 
     public enum SubscriptionEvent {
         CHANGE_POINT

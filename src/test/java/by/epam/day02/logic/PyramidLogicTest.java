@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.List;
 
 public class PyramidLogicTest {
     private static final Logger logger = LogManager.getLogger(PyramidLogicTest.class);

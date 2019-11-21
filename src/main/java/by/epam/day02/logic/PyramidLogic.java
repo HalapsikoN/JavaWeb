@@ -17,18 +17,6 @@ public class PyramidLogic {
         return instance;
     }
 
-    private double findDistanceBetweenPoints(Point p2, Point p1) {
-        return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2) + Math.pow(p2.getZ() - p1.getZ(), 2));
-    }
-
-    private double findSquareOfTriangle(Point pA, Point pB, Point pC) {
-        double sideAB = findDistanceBetweenPoints(pA, pB);
-        double sideAC = findDistanceBetweenPoints(pA, pC);
-        double sideCB = findDistanceBetweenPoints(pC, pB);
-        double semiPerimeter = (sideAB + sideAC + sideCB) / 2;
-        return Math.sqrt(semiPerimeter * (semiPerimeter - sideAB) * (semiPerimeter - sideAC) * (semiPerimeter - sideCB));
-    }
-
     public double findSquareOfPyramid(Pyramid pyramid) throws NotPyramidException {
         if (!isPyramid(pyramid)) {
             throw new NotPyramidException("at method \"findSquareOfPyramid\"");
@@ -69,39 +57,6 @@ public class PyramidLogic {
         }
     }
 
-    private Point findHighZPoint(Pyramid pyramid) {
-        Point highZPoint = pyramid.getPointA();
-        Point pointB = pyramid.getPointB();
-        Point pointC = pyramid.getPointC();
-        Point pointD = pyramid.getPointD();
-        if (highZPoint.getZ() < pointB.getZ()) {
-            highZPoint = pointB;
-        }
-        if (highZPoint.getZ() < pointC.getZ()) {
-            highZPoint = pointC;
-        }
-        if (highZPoint.getZ() < pointD.getZ()) {
-            highZPoint = pointD;
-        }
-        return highZPoint;
-    }
-
-    private Point findPointOfSplitByPlaneXY(Point pHigh, Point pLow) {
-        double newX;
-        double newY;
-        if (pHigh.getX() > pLow.getX()) {
-            newX = pHigh.getX() - ((pHigh.getX() - pLow.getX()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
-        } else {
-            newX = ((pLow.getX() - pHigh.getX()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ())) - pHigh.getX();
-        }
-        if (pHigh.getY() > pLow.getY()) {
-            newY = pHigh.getY() - ((pHigh.getY() - pLow.getY()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
-        } else {
-            newY = pHigh.getY() - ((pHigh.getY() - pLow.getY()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
-        }
-        return new Point(newX, newY, 0);
-    }
-
     public double findRatioOfPartsOfPyramidSplitedByCoordinatePlaneXY(Pyramid pyramid) throws NotPyramidException {
         //Point highZPoint1=findHighZPoint(pyramid);
         Point highZPoint = pyramid.getPointD();
@@ -139,5 +94,50 @@ public class PyramidLogic {
         return (pA.getX() == 0 && pB.getX() == 0 && pC.getX() == 0) ||
                 (pA.getY() == 0 && pB.getY() == 0 && pC.getY() == 0) ||
                 (pA.getZ() == 0 && pB.getZ() == 0 && pC.getZ() == 0);
+    }
+
+    private double findDistanceBetweenPoints(Point p2, Point p1) {
+        return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2) + Math.pow(p2.getZ() - p1.getZ(), 2));
+    }
+
+    private double findSquareOfTriangle(Point pA, Point pB, Point pC) {
+        double sideAB = findDistanceBetweenPoints(pA, pB);
+        double sideAC = findDistanceBetweenPoints(pA, pC);
+        double sideCB = findDistanceBetweenPoints(pC, pB);
+        double semiPerimeter = (sideAB + sideAC + sideCB) / 2;
+        return Math.sqrt(semiPerimeter * (semiPerimeter - sideAB) * (semiPerimeter - sideAC) * (semiPerimeter - sideCB));
+    }
+
+    private Point findHighZPoint(Pyramid pyramid) {
+        Point highZPoint = pyramid.getPointA();
+        Point pointB = pyramid.getPointB();
+        Point pointC = pyramid.getPointC();
+        Point pointD = pyramid.getPointD();
+        if (highZPoint.getZ() < pointB.getZ()) {
+            highZPoint = pointB;
+        }
+        if (highZPoint.getZ() < pointC.getZ()) {
+            highZPoint = pointC;
+        }
+        if (highZPoint.getZ() < pointD.getZ()) {
+            highZPoint = pointD;
+        }
+        return highZPoint;
+    }
+
+    private Point findPointOfSplitByPlaneXY(Point pHigh, Point pLow) {
+        double newX;
+        double newY;
+        if (pHigh.getX() > pLow.getX()) {
+            newX = pHigh.getX() - ((pHigh.getX() - pLow.getX()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
+        } else {
+            newX = ((pLow.getX() - pHigh.getX()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ())) - pHigh.getX();
+        }
+        if (pHigh.getY() > pLow.getY()) {
+            newY = pHigh.getY() - ((pHigh.getY() - pLow.getY()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
+        } else {
+            newY = pHigh.getY() - ((pHigh.getY() - pLow.getY()) * pHigh.getZ() / (pHigh.getZ() - pLow.getZ()));
+        }
+        return new Point(newX, newY, 0);
     }
 }

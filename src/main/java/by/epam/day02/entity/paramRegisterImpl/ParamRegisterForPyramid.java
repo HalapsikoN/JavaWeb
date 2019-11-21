@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
-public class ParamRegisterForPyramid implements ParamRegister, Observer {
+public class ParamRegisterForPyramid implements ParamRegister, Observer<EventManagerForFigure.SubscriptionEvent, Figure> {
 
     private static final Logger logger = LogManager.getLogger(ParamRegisterForPyramid.class);
 
