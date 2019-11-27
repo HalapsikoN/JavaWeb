@@ -20,3 +20,6 @@
 *.rar
 
 #i think they should not been seen by users
+.idea
+target
+project2.iml
