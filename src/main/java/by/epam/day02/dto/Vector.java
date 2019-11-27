@@ -1,4 +1,4 @@
-package by.epam.day02.entity.accessory;
+package by.epam.day02.dto;
 
 import by.epam.day02.entity.figureImpl.Point;
 

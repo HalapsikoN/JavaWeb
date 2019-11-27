@@ -1,18 +1,17 @@
-package by.epam.day02.entity.paramRegisterImpl;
+package by.epam.day02.observer.figureObserverImpl.paramRegisterImpl;
 
 import by.epam.day02.entity.Figure;
-import by.epam.day02.entity.ParamRegister;
 import by.epam.day02.entity.figureImpl.Pyramid;
 import by.epam.day02.exception.NotPyramidException;
 import by.epam.day02.logic.PyramidLogic;
-import by.epam.day02.observer.Observer;
 import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
+import by.epam.day02.observer.figureObserverImpl.ParamRegisterObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
-public class ParamRegisterForPyramid implements ParamRegister, Observer<EventManagerForFigure.SubscriptionEvent, Figure> {
+public class ParamRegisterForPyramid implements ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> {
 
     private static final Logger logger = LogManager.getLogger(ParamRegisterForPyramid.class);
 

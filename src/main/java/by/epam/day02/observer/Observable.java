@@ -1,10 +1,10 @@
 package by.epam.day02.observer;
 
-public interface Observable<Event, Observer> {
+public interface Observable<E, O> {
 
-    void subscribe(Observer listener);
+    void subscribe(O listener);
 
-    void unsubscribe(Observer listener);
+    void unsubscribe(O listener);
 
-    void notifyAllSubscribers(Event event);
+    void notifyAllSubscribers(E event);
 }

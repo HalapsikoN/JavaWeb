@@ -1,9 +1,10 @@
 package by.epam.day02.repository;
 
 import by.epam.day02.entity.Figure;
-import by.epam.day02.entity.ParamRegister;
+import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
+import by.epam.day02.observer.figureObserverImpl.ParamRegisterObserver;
 import by.epam.day02.entity.figureImpl.Pyramid;
-import by.epam.day02.entity.paramRegisterImpl.ParamRegisterForPyramid;
+import by.epam.day02.observer.figureObserverImpl.paramRegisterImpl.ParamRegisterForPyramid;
 import by.epam.day02.repository.specification.Specification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,7 @@ public class FigureRepository {
     public final static Logger logger = LogManager.getLogger(FigureRepository.class);
 
     private List<Figure> figureList;
-    private Map<String, ParamRegister> figureParamRegisterMap;
+    private Map<String, ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure>> figureParamRegisterMap;
 
     public FigureRepository() {
         figureList = new ArrayList<>();
@@ -55,11 +56,11 @@ public class FigureRepository {
         return findList;
     }
 
-    public Map<String, ParamRegister> getFigureParamRegisterMap() {
+    public Map<String, ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure>> getFigureParamRegisterMap() {
         return figureParamRegisterMap;
     }
 
-    public ParamRegister getParameters(Figure figure) {
+    public ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> getParameters(Figure figure) {
         return figureParamRegisterMap.get(figure.getId());
     }
 }

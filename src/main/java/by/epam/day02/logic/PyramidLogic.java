@@ -1,6 +1,6 @@
 package by.epam.day02.logic;
 
-import by.epam.day02.entity.accessory.Vector;
+import by.epam.day02.dto.Vector;
 import by.epam.day02.entity.figureImpl.Point;
 import by.epam.day02.entity.figureImpl.Pyramid;
 import by.epam.day02.exception.NotPyramidException;

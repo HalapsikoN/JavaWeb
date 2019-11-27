@@ -1,5 +1,7 @@
 package by.epam.day02.observer;
 
-public interface Observer<Event, ElementToObserve> {
-    void update(Event event, ElementToObserve figure);
+import by.epam.day02.entity.Figure;
+
+public interface Observer<E, F extends Figure> {
+    void update(E event, F figure);
 }

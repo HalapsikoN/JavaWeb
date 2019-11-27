@@ -3,7 +3,7 @@ package by.epam.day02.observer;
 import by.epam.day02.dao.loader.CreatorPyramid;
 import by.epam.day02.entity.figureImpl.Point;
 import by.epam.day02.entity.figureImpl.Pyramid;
-import by.epam.day02.entity.paramRegisterImpl.ParamRegisterForPyramid;
+import by.epam.day02.observer.figureObserverImpl.paramRegisterImpl.ParamRegisterForPyramid;
 import by.epam.day02.exception.NotPyramidException;
 import by.epam.day02.logic.PyramidLogic;
 import org.apache.logging.log4j.LogManager;

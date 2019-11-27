@@ -1,10 +1,11 @@
 package by.epam.day02.repository;
 
 import by.epam.day02.entity.Figure;
-import by.epam.day02.entity.ParamRegister;
+import by.epam.day02.observer.figureObservableImpl.EventManagerForFigure;
+import by.epam.day02.observer.figureObserverImpl.ParamRegisterObserver;
 import by.epam.day02.entity.figureImpl.Point;
 import by.epam.day02.entity.figureImpl.Pyramid;
-import by.epam.day02.entity.paramRegisterImpl.ParamRegisterForPyramid;
+import by.epam.day02.observer.figureObserverImpl.paramRegisterImpl.ParamRegisterForPyramid;
 import by.epam.day02.exception.IllegalDataInputException;
 import by.epam.day02.repository.specification.Specification;
 import by.epam.day02.repository.specification.specificationImpl.PointSpecification;
@@ -80,9 +81,9 @@ public class FigureRepositoryTest {
 
     @Test
     public void shouldRepositoryReturnParameterOfPyramid() {
-        ParamRegister expected = new ParamRegisterForPyramid(pyramid2);
+        ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> expected = new ParamRegisterForPyramid(pyramid2);
 
-        ParamRegister actual = figureRepository.getParameters(pyramid2);
+        ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> actual = figureRepository.getParameters(pyramid2);
 
         Assert.assertEquals(expected, actual);
     }
@@ -94,8 +95,8 @@ public class FigureRepositoryTest {
         figureRepository.addFigure(tempPyramid);
 
         tempPyramid.setPointA(point1);
-        ParamRegister expected = new ParamRegisterForPyramid(tempPyramid);
-        ParamRegister actual = figureRepository.getParameters(tempPyramid);
+        ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> expected = new ParamRegisterForPyramid(tempPyramid);
+        ParamRegisterObserver<EventManagerForFigure.SubscriptionEvent, Figure> actual = figureRepository.getParameters(tempPyramid);
 
         figureRepository.removeFigure(tempPyramid);
 
