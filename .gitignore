@@ -1,6 +1,5 @@
 ### Java ###
 # Compiled class file
-*.class
 
 # Log file
 *.log
@@ -20,3 +19,7 @@
 *.tar.gz
 *.rar
 
+#i think they should not been seen by users
+.idea
+target
+project2.iml
