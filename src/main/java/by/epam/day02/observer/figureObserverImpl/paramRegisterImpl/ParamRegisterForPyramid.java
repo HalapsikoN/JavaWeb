@@ -29,9 +29,6 @@ public class ParamRegisterForPyramid implements ParamRegisterObserver<EventManag
         }
     }
 
-    public ParamRegisterForPyramid() {
-    }
-
     public double getSquare() {
         return square;
     }

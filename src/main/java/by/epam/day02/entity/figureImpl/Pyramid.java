@@ -25,9 +25,6 @@ public class Pyramid implements Figure {
         this.eventManagerForFigure = new EventManagerForFigure(this);
     }
 
-    public Pyramid() {
-    }
-
     public Point getPointA() {
         return pointA;
     }

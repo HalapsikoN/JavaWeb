@@ -23,9 +23,6 @@ public class Point implements Figure {
         this.eventManagerForFigure = new EventManagerForFigure(this);
     }
 
-    public Point() {
-    }
-
     public double getX() {
         return x;
     }
